@@ -92,12 +92,12 @@ Inside is a single, no configuration required, HTML file using the `ipfs-mini` m
 
 ## Browser Usage
 
-`ipfs-mini` is completely browserifiable and webpack ready. The main export found in our distributions [dist](./dist) folder is `IPFS`. There you will find two builds of `ipfs-mini`, one compressed and minified `ipfs.min.js` and one uncompressed `ipfs.js`.
+`ipfs-mini` is completely browserifiable and webpack ready. The main export found in our distributions [dist](./dist) folder is `IPFS`. There you will find two builds of `ipfs-mini`, one compressed and minified `ipfs-mini.min.js` and one uncompressed `ipfs-mini.js`.
 
 ```
 <html>
   <body>
-    <script type="text/javascript" src="ifpsjs.min.js">
+    <script type="text/javascript" src="ipfs-mini.min.js">
     <script type="text/javascript">
       var ipfs = new IPFS({ provider: 'ipfs.infura.io', protocol: 'https' });
 
