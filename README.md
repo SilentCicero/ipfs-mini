@@ -57,9 +57,9 @@ ipfs.add('hello world!', (err, result) => {
   console.log(err, result);
 });
 
-// result null 'emTd2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu7sdj'
+// result null 'QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j'
 
-ipfs.cat('emTd2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu7sdj', (err, result) => {
+ipfs.cat('QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j', (err, result) => {
   console.log(err, result);
 });
 
