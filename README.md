@@ -37,7 +37,9 @@
 
 <br />
 
-A simple module for querying an IPFS node, in the browser and in nodejs. Inspired by: [`browser-ipfs`](https://github.com/pelle/browser-ipfs) by the great Pelle B. Only **2.76 kB** compressed.
+A simple module for querying an IPFS node, that works in the browser and in nodejs. Only **2.76 kB** compressed!
+
+This module was inspired by [`browser-ipfs`](https://github.com/pelle/browser-ipfs).
 
 ## Install
 
