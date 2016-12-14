@@ -1,7 +1,7 @@
 const assert = require('chai').assert;
 const IPFS = require('../index.js');
 
-describe('ipfsjs', () => {
+describe('ipfs-mini', () => {
   describe('constructor', () => {
     it('should function normally', (done) => {
       const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https' });

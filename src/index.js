@@ -10,7 +10,7 @@ module.exports = IPFS;
  * @throws if the `new` flag is not used
  */
 function IPFS(provider) {
-  if (!(this instanceof IPFS)) { throw new Error('[ipfsjs] IPFS instance must be instantiated with "new" flag (e.g. var ipfs = new IPFS("http://localhost:8545");).'); }
+  if (!(this instanceof IPFS)) { throw new Error('[ipfs-mini] IPFS instance must be instantiated with "new" flag (e.g. var ipfs = new IPFS("http://localhost:8545");).'); }
 
   const self = this;
   self.setProvider(provider || {});
@@ -53,12 +53,12 @@ IPFS.prototype.sendAsync = function sendAsync(opts, cb) {
   request.onreadystatechange = () => {
     if (request.readyState === 4 && request.timeout !== 1) {
       if (request.status !== 200) {
-        callback(new Error(`[ipfsjs] status ${request.status}: ${request.responseText}`), null);
+        callback(new Error(`[ipfs-mini] status ${request.status}: ${request.responseText}`), null);
       } else {
         try {
           callback(null, (options.jsonParse ? JSON.parse(request.responseText) : request.responseText));
         } catch (jsonError) {
-          callback(new Error(`[ipfsjs] while parsing data: '${String(request.responseText)}', error: ${String(jsonError)} with provider: '${self.requestBase}'`, null));
+          callback(new Error(`[ipfs-mini] while parsing data: '${String(request.responseText)}', error: ${String(jsonError)} with provider: '${self.requestBase}'`, null));
         }
       }
     }
@@ -72,7 +72,7 @@ IPFS.prototype.sendAsync = function sendAsync(opts, cb) {
       request.send();
     }
   } catch (error) {
-    callback(new Error(`[ipfsjs] CONNECTION ERROR: Couldn't connect to node '${self.provider}': ${JSON.stringify(error, null, 2)}`), null);
+    callback(new Error(`[ipfs-mini] CONNECTION ERROR: Couldn't connect to node '${self.provider}': ${JSON.stringify(error, null, 2)}`), null);
   }
 };
 

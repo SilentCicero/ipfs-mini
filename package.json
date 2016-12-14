@@ -1,5 +1,5 @@
 {
-  "name": "ipfsjs",
+  "name": "ipfs-mini",
   "version": "1.0.0",
   "description": "A super tiny module for querying an IPFS node that works in nodejs and the browser.",
   "main": "lib/index.js",
@@ -11,7 +11,7 @@
     "src"
   ],
   "scripts": {
-    "start": "node ./src/add.js",
+    "start": "npm test",
     "release": "npmpub",
     "pretest": "npm run lint",
     "prepublish": "npm run build",
@@ -34,7 +34,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/silentcicero/ipfsjs.git"
+    "url": "git+ssh://git@github.com/silentcicero/ipfs-mini.git"
   },
   "keywords": [
     "ipfs",
@@ -54,9 +54,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/silentcicero/ipfsjs/issues"
+    "url": "https://github.com/silentcicero/ipfs-mini/issues"
   },
-  "homepage": "https://github.com/silentcicero/ipfsjs#readme",
+  "homepage": "https://github.com/silentcicero/ipfs-mini#readme",
   "babel": {
     "plugins": [
       [

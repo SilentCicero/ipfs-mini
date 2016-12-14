@@ -1,7 +1,7 @@
 var webpack = require('webpack'); // eslint-disable-line
 
 var env = process.env.NODE_ENV;   // eslint-disable-line
-var filename = 'ipfsjs';      // eslint-disable-line
+var filename = 'ipfs-mini';      // eslint-disable-line
 var library = 'IPFS';          // eslint-disable-line
 var config = {                    // eslint-disable-line
   module: {

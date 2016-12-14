@@ -1,32 +1,32 @@
-## ipfsjs
+## ipfs-mini
 
 <div>
   <!-- Dependency Status -->
-  <a href="https://david-dm.org/silentcicero/ipfsjs">
-    <img src="https://david-dm.org/silentcicero/ipfsjs.svg"
+  <a href="https://david-dm.org/silentcicero/ipfs-mini">
+    <img src="https://david-dm.org/silentcicero/ipfs-mini.svg"
     alt="Dependency Status" />
   </a>
 
   <!-- devDependency Status -->
-  <a href="https://david-dm.org/silentcicero/ipfsjs#info=devDependencies">
-    <img src="https://david-dm.org/silentcicero/ipfsjs/dev-status.svg" alt="devDependency Status" />
+  <a href="https://david-dm.org/silentcicero/ipfs-mini#info=devDependencies">
+    <img src="https://david-dm.org/silentcicero/ipfs-mini/dev-status.svg" alt="devDependency Status" />
   </a>
 
   <!-- Build Status -->
-  <a href="https://travis-ci.org/silentcicero/ipfsjs">
-    <img src="https://travis-ci.org/silentcicero/ipfsjs.svg"
+  <a href="https://travis-ci.org/silentcicero/ipfs-mini">
+    <img src="https://travis-ci.org/silentcicero/ipfs-mini.svg"
     alt="Build Status" />
   </a>
 
   <!-- NPM Version -->
-  <a href="https://www.npmjs.org/package/ipfsjs">
-    <img src="http://img.shields.io/npm/v/ipfsjs.svg"
+  <a href="https://www.npmjs.org/package/ipfs-mini">
+    <img src="http://img.shields.io/npm/v/ipfs-mini.svg"
     alt="NPM version" />
   </a>
 
   <!-- Test Coverage -->
-  <a href="https://coveralls.io/r/silentcicero/ipfsjs">
-    <img src="https://coveralls.io/repos/github/silentcicero/ipfsjs/badge.svg" alt="Test Coverage" />
+  <a href="https://coveralls.io/r/silentcicero/ipfs-mini">
+    <img src="https://coveralls.io/repos/github/silentcicero/ipfs-mini/badge.svg" alt="Test Coverage" />
   </a>
 
   <!-- Javascript Style -->
@@ -44,13 +44,13 @@ This module was inspired by [`browser-ipfs`](https://github.com/pelle/browser-ip
 ## Install
 
 ```
-npm install --save ipfsjs
+npm install --save ipfs-mini
 ```
 
 ## Usage
 
 ```js
-const IPFS = require('ipfsjs');
+const IPFS = require('ipfs-mini');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
 ipfs.add('hello world!', (err, result) => {
@@ -88,11 +88,11 @@ This module uses the `js-ipfs-api` module for the adding operations on nodejs. H
 
 An example of the module in use for the browser, can be found in [./example](./examples).
 
-Inside is a single, no configuration required, HTML file using the `ipfsjs` module.
+Inside is a single, no configuration required, HTML file using the `ipfs-mini` module.
 
 ## Browser Usage
 
-`ipfsjs` is completely browserifiable and webpack ready. The main export found in our distributions [dist](./dist) folder is `IPFS`. There you will find two builds of `ipfsjs`, one compressed and minified `ipfs.min.js` and one uncompressed `ipfs.js`.
+`ipfs-mini` is completely browserifiable and webpack ready. The main export found in our distributions [dist](./dist) folder is `IPFS`. There you will find two builds of `ipfs-mini`, one compressed and minified `ipfs.min.js` and one uncompressed `ipfs.js`.
 
 ```
 <html>
@@ -116,15 +116,15 @@ Hash: 55d261679ea2edac14af
 Version: webpack 2.1.0-beta.15
 Time: 612ms
         Asset     Size  Chunks             Chunk Names
-    ipfsjs.js  9.55 kB       0  [emitted]  main
-ipfsjs.js.map    11 kB       0  [emitted]  main
+    ipfs-mini.js  9.55 kB       0  [emitted]  main
+ipfs-mini.js.map    11 kB       0  [emitted]  main
     + 3 hidden modules
 
 Hash: 20584eb8548f596cd97d                                                         
 Version: webpack 2.1.0-beta.15
 Time: 737ms
         Asset     Size  Chunks             Chunk Names
-ipfsjs.min.js  2.76 kB       0  [emitted]  main
+ipfs-mini.min.js  2.76 kB       0  [emitted]  main
     + 3 hidden modules
 ```
 
@@ -132,7 +132,7 @@ ipfsjs.min.js  2.76 kB       0  [emitted]  main
 
 ### constructor
 
-[index.js:ipfsjs](../../../blob/master/src/index.js "Source code on GitHub")
+[index.js:ipfs-mini](../../../blob/master/src/index.js "Source code on GitHub")
 
 Intakes a single provider object, outputs an `ipfs` instance.
 
@@ -143,7 +143,7 @@ Intakes a single provider object, outputs an `ipfs` instance.
 Result output `ipfs` **Object** instance.
 
 ```js
-const IPFS = require('ipfsjs');
+const IPFS = require('ipfs-mini');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
 ipfs.cat('QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j', (err, result) => {
@@ -153,7 +153,7 @@ ipfs.cat('QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j', (err, result) => {
 
 ### setProvider
 
-[index.js:ipfsjs](../../../blob/master/src/index.js "Source code on GitHub")
+[index.js:ipfs-mini](../../../blob/master/src/index.js "Source code on GitHub")
 
 Sets the IPFS instance provider.
 
@@ -166,7 +166,7 @@ Sets the IPFS instance provider.
 No result output.
 
 ```js
-const IPFS = require('ipfsjs');
+const IPFS = require('ipfs-mini');
 const ipfs = new IPFS();
 
 ipfs.setProvider({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
@@ -176,7 +176,7 @@ ipfs.cat('QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j', cb);
 
 ### add
 
-[index.js:ipfsjs](../../../blob/master/src/index.js "Source code on GitHub")
+[index.js:ipfs-mini](../../../blob/master/src/index.js "Source code on GitHub")
 
 Queries `/add` and adds a single String or Buffer data to IPFS, returns an IPFS hash.
 
@@ -187,7 +187,7 @@ Queries `/add` and adds a single String or Buffer data to IPFS, returns an IPFS 
 Result output `ipfsHash` **String**.
 
 ```js
-const IPFS = require('ipfsjs');
+const IPFS = require('ipfs-mini');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
 ipfs.add('hello world!', (err, result) => {
@@ -199,7 +199,7 @@ ipfs.add('hello world!', (err, result) => {
 
 ### addJSON
 
-[index.js:ipfsjs](../../../blob/master/src/index.js "Source code on GitHub")
+[index.js:ipfs-mini](../../../blob/master/src/index.js "Source code on GitHub")
 
 Queries `/add` and adds stringified JSON to IPFS, returns a single ipfs hash.
 
@@ -210,7 +210,7 @@ Queries `/add` and adds stringified JSON to IPFS, returns a single ipfs hash.
 Result output `ipfsHash` **String**.
 
 ```js
-const IPFS = require('ipfsjs');
+const IPFS = require('ipfs-mini');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
 ipfs.addJSON({ somevalue: 2, name: 'Nick' }, (err, result) => {
@@ -222,7 +222,7 @@ ipfs.addJSON({ somevalue: 2, name: 'Nick' }, (err, result) => {
 
 ### cat
 
-[index.js:ipfsjs](../../../blob/master/src/index.js "Source code on GitHub")
+[index.js:ipfs-mini](../../../blob/master/src/index.js "Source code on GitHub")
 
 Queries a `/cat` request, returns data as a String.
 
@@ -233,7 +233,7 @@ Queries a `/cat` request, returns data as a String.
 Result output `data` **String**.
 
 ```js
-const IPFS = require('ipfsjs');
+const IPFS = require('ipfs-mini');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
 ipfs.cat('QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j', (err, result) => {
@@ -245,7 +245,7 @@ ipfs.cat('QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j', (err, result) => {
 
 ### catJSON
 
-[index.js:ipfsjs](../../../blob/master/src/index.js "Source code on GitHub")
+[index.js:ipfs-mini](../../../blob/master/src/index.js "Source code on GitHub")
 
 Queries a `/cat` request, returns data as a parsed JSON object.
 
@@ -256,7 +256,7 @@ Queries a `/cat` request, returns data as a parsed JSON object.
 Result output `data` **Object**.
 
 ```js
-const IPFS = require('ipfsjs');
+const IPFS = require('ipfs-mini');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
 ipfs.catJSON('QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j', (err, result) => {
@@ -268,7 +268,7 @@ ipfs.catJSON('QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j', (err, result) => 
 
 ### stat
 
-[index.js:ipfsjs](../../../blob/master/src/index.js "Source code on GitHub")
+[index.js:ipfs-mini](../../../blob/master/src/index.js "Source code on GitHub")
 
 Queries a `/object/stat` request, returns data stats object.
 
@@ -279,7 +279,7 @@ Queries a `/object/stat` request, returns data stats object.
 Result output stats `data` **Object**.
 
 ```js
-const IPFS = require('ipfsjs');
+const IPFS = require('ipfs-mini');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
 ipfs.stat('QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j', (err, result) => {
@@ -308,20 +308,20 @@ There is always a lot of work to do, and will have many rules to maintain. So pl
 - Create, enhance, and debug silentcicero rules (see our guide to ["Working on rules"](./github/CONTRIBUTING.md)).
 - Improve documentation.
 - Chime in on any open issue or pull request.
-- Open new issues about your ideas for making `ipfsjs` better, and pull requests to show us how your idea works.
+- Open new issues about your ideas for making `ipfs-mini` better, and pull requests to show us how your idea works.
 - Add new tests to *absolutely anything*.
 - Create or contribute to ecosystem tools, like modules for encoding or contracts.
 - Spread the word.
 
 Please consult our [Code of Conduct](CODE_OF_CONDUCT.md) docs before helping out.
 
-We communicate via [issues](https://github.com/silentcicero/ipfsjs/issues) and [pull requests](https://github.com/silentcicero/ipfsjs/pulls).
+We communicate via [issues](https://github.com/silentcicero/ipfs-mini/issues) and [pull requests](https://github.com/silentcicero/ipfs-mini/pulls).
 
 ## Important documents
 
 - [Changelog](CHANGELOG.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
-- [License](https://raw.githubusercontent.com/silentcicero/ipfsjs/master/LICENSE)
+- [License](https://raw.githubusercontent.com/silentcicero/ipfs-mini/master/LICENSE)
 
 ## Licence
 
