@@ -1,0 +1,75 @@
+<html>
+  <body>
+    <h2>ipfsjs</h2>
+    <h3>Browser Example</h3>
+
+    <hr />
+
+    <h4>Get IPFS Hash Data<h4>
+    <input type="text" id="lookupHash" placeholder="QmbhrsdhbvQy3RyNiDdStgF4YRVc4arteS3wL5ES5M6cVd" />
+
+    <button id="lookup">Lookup Block</button>
+    <button id="lookupStats">Get Stats</button>
+
+    <br /><br />
+
+    <div id="lookupResponse"></div>
+
+    <hr />
+
+    <h4>Add String Data</h4>
+    <textarea id="addInputData" placeholder="Hello world!"></textarea>
+
+    <br />
+
+    <button id="addData">Add Data</button>
+
+    <br /><br />
+
+    <div id="addResponse"></div>
+
+    <script type="text/javascript" src="../dist/ipfsjs.js"></script>
+    <script type="text/javascript">
+      var el = function(id){ return document.querySelector(id); };
+      var ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https' });
+
+      el('#lookup').addEventListener('click', function(){
+        var isJSON = false;
+        var lookupHash = el('#lookupHash').value;
+
+        ipfs.cat(lookupHash, (err, result) => {
+          if (err) {
+            el('#lookupResponse').innerHTML = 'Hmm.. there was an error: ' + String(err);
+          } else {
+            el('#lookupResponse').innerHTML = result;
+          }
+        });
+      });
+
+      el('#lookupStats').addEventListener('click', function(){
+        var lookupHash = el('#lookupHash').value;
+
+        ipfs.stat(lookupHash, (err, result) => {
+          if (err) {
+            el('#lookupResponse').innerHTML = 'Hmm.. there was an error: ' + String(err);
+          } else {
+            el('#lookupResponse').innerHTML = JSON.stringify(result, null, 2);
+          }
+        });
+      });
+
+      el('#addData').addEventListener('click', function(){
+        var isJSON = false;
+        var inputData = el('#addInputData').value;
+
+        ipfs.add(inputData, (err, result) => {
+          if (err) {
+            el('#addResponse').innerHTML = 'Hmm.. there was an error: ' + String(err);
+          } else {
+            el('#addResponse').innerHTML = result;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
