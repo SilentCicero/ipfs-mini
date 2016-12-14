@@ -209,15 +209,11 @@ IPFS.prototype.sendAsync = function sendAsync(opts, cb) {
     }
   };
 
-  try {
-    if (options.payload) {
-      request.enctype = 'multipart/form-data';
-      request.send(options.payload);
-    } else {
-      request.send();
-    }
-  } catch (error) {
-    callback(new Error('[ipfs-mini] CONNECTION ERROR: Couldn\'t connect to node \'' + self.provider + '\': ' + JSON.stringify(error, null, 2)), null);
+  if (options.payload) {
+    request.enctype = 'multipart/form-data';
+    request.send(options.payload);
+  } else {
+    request.send();
   }
 };
 

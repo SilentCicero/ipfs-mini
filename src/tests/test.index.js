@@ -101,6 +101,19 @@ describe('ipfs-mini', () => {
       });
     });
 
+    it('handle invalid payload with Null', (done) => {
+      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https' });
+
+      ipfs.sendAsync({ payload: null,
+        uri: '/add',
+        accept: 'application/json' }, (err, result) => {
+        assert.equal(typeof err, 'object');
+        assert.equal(result, null);
+
+        done();
+      });
+    });
+
     it('handle invalid payload with add', (done) => {
       const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https' });
 
