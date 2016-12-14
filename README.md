@@ -2,19 +2,19 @@
 
 <div>
   <!-- Dependency Status -->
-  <a href="https://david-dm.org/silentcicero/ipfs-mini">
-    <img src="https://david-dm.org/silentcicero/ipfs-mini.svg"
+  <a href="https://david-dm.org/SilentCicero/ipfs-mini">
+    <img src="https://david-dm.org/SilentCicero/ipfs-mini.svg"
     alt="Dependency Status" />
   </a>
 
   <!-- devDependency Status -->
-  <a href="https://david-dm.org/silentcicero/ipfs-mini#info=devDependencies">
-    <img src="https://david-dm.org/silentcicero/ipfs-mini/dev-status.svg" alt="devDependency Status" />
+  <a href="https://david-dm.org/SilentCicero/ipfs-mini#info=devDependencies">
+    <img src="https://david-dm.org/SilentCicero/ipfs-mini/dev-status.svg" alt="devDependency Status" />
   </a>
 
   <!-- Build Status -->
-  <a href="https://travis-ci.org/silentcicero/ipfs-mini">
-    <img src="https://travis-ci.org/silentcicero/ipfs-mini.svg"
+  <a href="https://travis-ci.org/SilentCicero/ipfs-mini">
+    <img src="https://travis-ci.org/SilentCicero/ipfs-mini.svg"
     alt="Build Status" />
   </a>
 
@@ -25,8 +25,8 @@
   </a>
 
   <!-- Test Coverage -->
-  <a href="https://coveralls.io/r/silentcicero/ipfs-mini">
-    <img src="https://coveralls.io/repos/github/silentcicero/ipfs-mini/badge.svg" alt="Test Coverage" />
+  <a href="https://coveralls.io/r/SilentCicero/ipfs-mini">
+    <img src="https://coveralls.io/repos/github/SilentCicero/ipfs-mini/badge.svg" alt="Test Coverage" />
   </a>
 
   <!-- Javascript Style -->
@@ -37,7 +37,7 @@
 
 <br />
 
-A simple module for querying an IPFS node, that works in the browser and in nodejs. Only **2.76 kB** compressed!
+A super tiny module for querying an IPFS node, that works in the browser and in nodejs. Only **2.76 kB** compressed!
 
 This module was inspired by [`browser-ipfs`](https://github.com/pelle/browser-ipfs).
 
