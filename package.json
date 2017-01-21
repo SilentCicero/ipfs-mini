@@ -177,12 +177,10 @@
     "webpack": "2.1.0-beta.15"
   },
   "browser": {
-    "./lib/lib/add.js": "./lib/lib/add.browser.js",
-    "./src/lib/add.js": "./src/lib/add.browser.js"
+    "xmlhttprequest": false
   },
   "dependencies": {
-    "w3c-xmlhttprequest": "2.1.2",
-    "ipfs-api": "12.1.0"
+    "xmlhttprequest": "^1.8.0"
   },
   "lint-staged": {
     "lint:eslint": "*.js"

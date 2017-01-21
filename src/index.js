@@ -1,5 +1,13 @@
-const XMLHttpRequest = require('w3c-xmlhttprequest').XMLHttpRequest;
-const add = require('./lib/add.js');
+let XMLHttpRequest; // eslint-disable-line
+
+// browser
+if (typeof window !== 'undefined' && window.XMLHttpRequest) {
+  XMLHttpRequest = window.XMLHttpRequest; // eslint-disable-line
+
+// node
+} else {
+  XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest; // eslint-disable-line
+}
 
 module.exports = IPFS;
 
@@ -44,12 +52,6 @@ IPFS.prototype.sendAsync = function sendAsync(opts, cb) {
   const options = opts || {};
   const callback = cb || function emptyCallback() {};
 
-  request.open('POST', `${self.requestBase}${opts.uri}`);
-
-  if (options.accept) {
-    request.setRequestHeader('accept', options.accept);
-  }
-
   request.onreadystatechange = () => {
     if (request.readyState === 4 && request.timeout !== 1) {
       if (request.status !== 200) {
@@ -65,12 +67,34 @@ IPFS.prototype.sendAsync = function sendAsync(opts, cb) {
   };
 
   if (options.payload) {
-    request.enctype = 'multipart/form-data';
+    request.open('POST', `${self.requestBase}${opts.uri}`);
+  } else {
+    request.open('GET', `${self.requestBase}${opts.uri}`);
+  }
+
+  if (options.accept) {
+    request.setRequestHeader('accept', options.accept);
+  }
+
+  if (options.payload && options.boundary) {
+    request.setRequestHeader('Content-Type', `multipart/form-data; boundary=${options.boundary}`);
     request.send(options.payload);
   } else {
     request.send();
   }
 };
+
+/**
+ * creates a boundary that isn't part of the payload
+ */
+function createBoundary(data) {
+  while (true) {
+    const boundary = `----IPFSMini${Math.random() * 100000}.${Math.random() * 100000}`;
+    if (data.indexOf(boundary) === -1) {
+      return boundary;
+    }
+  }
+}
 
 /**
  * Add an string or buffer to IPFS
@@ -79,8 +103,12 @@ IPFS.prototype.sendAsync = function sendAsync(opts, cb) {
  * @callback {String} `ipfsHash` returns an IPFS hash string
  */
 IPFS.prototype.add = function addData(input, callback) {
-  const self = this;
-  add(input, self, callback);
+  const data = ((typeof input === 'object' && input.isBuffer) ? input.toString('binary') : input);
+  const boundary = createBoundary(data);
+  const payload = `--${boundary}\r\nContent-Disposition: form-data; name="path"\r\nContent-Type: application/octet-stream\r\n\r\n${data}\r\n--${boundary}--`;
+
+  const addCallback = (err, result) => callback(err, (!err ? result.Hash : null));
+  this.sendAsync({ jsonParse: true, accept: 'application/json', uri: '/add', payload, boundary }, addCallback);
 };
 
 /**

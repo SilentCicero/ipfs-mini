@@ -64,83 +64,32 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ function(module, exports) {
 
-"use strict";
-'use strict';
-
-/**
- * The add method for the IPFS api in the browser
- * @param {String|Buffer} `inputData` the data to be stored
- * @param {Object} `self` the ipfs instance
- * @param {Function} `callback` the callback
- * @callback {String} `ipfs` returns an IPFS hash string
- */
-
-module.exports = function add(input, self, callback) {
-  var payload = new FormData();
-  var data = typeof input === 'object' && input.isBuffer ? input.toString('binary') : input;
-  payload.append('file', new Blob([data], {}));
-  var addCallback = function addCallback(err, result) {
-    return callback(err, !err ? result.Hash : null);
-  };
-
-  self.sendAsync({ jsonParse: true, accept: 'application/json', uri: '/add', payload: payload }, addCallback);
-};
+/* (ignored) */
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
-
-"use strict";
-/**
- * The MIT License (MIT)
- *
- * Copyright (c) 2016 Yamagishi Kazutoshi
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-
-'use strict';
-
-/* global window */
-module.exports = {
-  XMLHttpRequest: window.XMLHttpRequest,
-  XMLHttpRequestUpload: window.XMLHttpRequestUpload,
-  FormData: window.FormData
-};
-
-
-/***/ },
-/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
-var XMLHttpRequest = __webpack_require__(1).XMLHttpRequest;
-var add = __webpack_require__(0);
+var XMLHttpRequest = void 0; // eslint-disable-line
+
+// browser
+if (typeof window !== 'undefined' && window.XMLHttpRequest) {
+  XMLHttpRequest = window.XMLHttpRequest; // eslint-disable-line
+
+  // node
+} else {
+  XMLHttpRequest = __webpack_require__(0).XMLHttpRequest; // eslint-disable-line
+}
 
 module.exports = IPFS;
 
@@ -189,12 +138,6 @@ IPFS.prototype.sendAsync = function sendAsync(opts, cb) {
   var options = opts || {};
   var callback = cb || function emptyCallback() {};
 
-  request.open('POST', '' + self.requestBase + opts.uri);
-
-  if (options.accept) {
-    request.setRequestHeader('accept', options.accept);
-  }
-
   request.onreadystatechange = function () {
     if (request.readyState === 4 && request.timeout !== 1) {
       if (request.status !== 200) {
@@ -210,12 +153,34 @@ IPFS.prototype.sendAsync = function sendAsync(opts, cb) {
   };
 
   if (options.payload) {
-    request.enctype = 'multipart/form-data';
+    request.open('POST', '' + self.requestBase + opts.uri);
+  } else {
+    request.open('GET', '' + self.requestBase + opts.uri);
+  }
+
+  if (options.accept) {
+    request.setRequestHeader('accept', options.accept);
+  }
+
+  if (options.payload && options.boundary) {
+    request.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + options.boundary);
     request.send(options.payload);
   } else {
     request.send();
   }
 };
+
+/**
+ * creates a boundary that isn't part of the payload
+ */
+function createBoundary(data) {
+  while (true) {
+    var boundary = '----IPFSMini' + Math.random() * 100000 + '.' + Math.random() * 100000;
+    if (data.indexOf(boundary) === -1) {
+      return boundary;
+    }
+  }
+}
 
 /**
  * Add an string or buffer to IPFS
@@ -224,8 +189,14 @@ IPFS.prototype.sendAsync = function sendAsync(opts, cb) {
  * @callback {String} `ipfsHash` returns an IPFS hash string
  */
 IPFS.prototype.add = function addData(input, callback) {
-  var self = this;
-  add(input, self, callback);
+  var data = typeof input === 'object' && input.isBuffer ? input.toString('binary') : input;
+  var boundary = createBoundary(data);
+  var payload = '--' + boundary + '\r\nContent-Disposition: form-data; name="path"\r\nContent-Type: application/octet-stream\r\n\r\n' + data + '\r\n--' + boundary + '--';
+
+  var addCallback = function addCallback(err, result) {
+    return callback(err, !err ? result.Hash : null);
+  };
+  this.sendAsync({ jsonParse: true, accept: 'application/json', uri: '/add', payload: payload, boundary: boundary }, addCallback);
 };
 
 /**
