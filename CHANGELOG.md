@@ -1,3 +1,7 @@
+# 1.1.0 -- remove ipfs-api
+
+1. Remove ipfs-api requirement.. Yay.. thanks pelle!
+
 # 1.0.0 -- ipfsjs
 
 1. Basic testing

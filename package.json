@@ -1,6 +1,6 @@
 {
   "name": "ipfs-mini",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A super tiny module for querying an IPFS node that works in nodejs and the browser.",
   "main": "lib/index.js",
   "files": [
@@ -177,7 +177,8 @@
     "webpack": "2.1.0-beta.15"
   },
   "browser": {
-    "xmlhttprequest": false
+    "xmlhttprequest": false,
+    "./src/lib/XMLHttpRequest.js": "./src/lib/XMLHttpRequest-browser.js"
   },
   "dependencies": {
     "xmlhttprequest": "^1.8.0"

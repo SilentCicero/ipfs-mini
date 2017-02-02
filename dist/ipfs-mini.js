@@ -1,5 +1,5 @@
- /* eslint-disable */ 
- /* eslint-disable */ 
+ /* eslint-disable */
+ /* eslint-disable */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -69,9 +69,14 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-/* (ignored) */
+"use strict";
+'use strict';
+
+var XMLHttpRequest = __webpack_require__(2).XMLHttpRequest;
+
+module.exports = XMLHttpRequest;
 
 /***/ },
 /* 1 */
@@ -80,16 +85,7 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 'use strict';
 
-var XMLHttpRequest = void 0; // eslint-disable-line
-
-// browser
-if (typeof window !== 'undefined' && window.XMLHttpRequest) {
-  XMLHttpRequest = window.XMLHttpRequest; // eslint-disable-line
-
-  // node
-} else {
-  XMLHttpRequest = __webpack_require__(0).XMLHttpRequest; // eslint-disable-line
-}
+var XMLHttpRequest = __webpack_require__(0);
 
 module.exports = IPFS;
 
@@ -253,6 +249,12 @@ IPFS.prototype.catJSON = function cat(ipfsHash, callback) {
     }
   });
 };
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+/* (ignored) */
 
 /***/ }
 /******/ ])

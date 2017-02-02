@@ -1,13 +1,4 @@
-let XMLHttpRequest; // eslint-disable-line
-
-// browser
-if (typeof window !== 'undefined' && window.XMLHttpRequest) {
-  XMLHttpRequest = window.XMLHttpRequest; // eslint-disable-line
-
-// node
-} else {
-  XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest; // eslint-disable-line
-}
+const XMLHttpRequest = require('./lib/XMLHttpRequest');
 
 module.exports = IPFS;
 
