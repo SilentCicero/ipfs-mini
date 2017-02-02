@@ -45,7 +45,7 @@ describe('ipfs-mini', () => {
       const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https' });
 
       ipfs.sendAsync({ payload: '',
-        uri: '/cat/QmbhrsdhbvQy3RyNiDdStgF4YRVc4arteS3wL5ES5M6cVd',
+        uri: '/cat/QmXSVWNxQ9zBE6H3teHAHo5mCW8nkcNFaPkzBVFoCjKu1Q',
         accept: 'application/json' });
     });
 
@@ -53,7 +53,7 @@ describe('ipfs-mini', () => {
       const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https' });
 
       ipfs.sendAsync({ payload: '',
-        uri: '/cat/QmbhrsdhbvQy3RyNiDdStgF4YRVc4arteS3wL5ES5M6cVd',
+        uri: '/cat/QmXSVWNxQ9zBE6H3teHAHo5mCW8nkcNFaPkzBVFoCjKu1Q',
         accept: 'application/json' }, (err, result) => {
         assert.equal(err, null);
         assert.equal(typeof result, 'string');
@@ -66,7 +66,7 @@ describe('ipfs-mini', () => {
       const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'http' });
 
       ipfs.sendAsync({ payload: '',
-        uri: '/cat/Qma2uQEvt39zhpdT1fRC3UzS48RXPRPKaPyVoyEqwZADck',
+        uri: '/cat/QmXSVWNxQ9zBE6H3teHAHo5mCW8nkcNFaPkzBVFoCjKu1Q',
         accept: 'application/json' }, (err, result) => {
         assert.equal(typeof err, 'object');
         assert.equal(result, null);
@@ -79,7 +79,7 @@ describe('ipfs-mini', () => {
       const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https' });
 
       ipfs.sendAsync({ payload: '',
-        uri: '/cat/Qma2uQEvt39zhpdT1fRC3UzS48RXPRPKaPyVoyEqwZADck',
+        uri: '/cat/QmXSVWNxQ9zBE6H3teHAHo5mCW8nkcNFaPkzBVFoCjKu1Q',
         accept: 'application/json', jsonParse: true }, (err, result) => {
         assert.equal(typeof err, 'object');
         assert.equal(result, null);
@@ -92,7 +92,7 @@ describe('ipfs-mini', () => {
       const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https' });
 
       ipfs.sendAsync({ payload: ipfs.sendAsync,
-        uri: '/cat/Qma2uQEvt39zhpdT1fRC3UzS48RXPRPKaPyVoyEqwZADck',
+        uri: '/cat/QmXSVWNxQ9zBE6H3teHAHo5mCW8nkcNFaPkzBVFoCjKu1Q',
         accept: 'application/json' }, (err, result) => {
         assert.equal(typeof err, 'object');
         assert.equal(result, null);
@@ -106,6 +106,7 @@ describe('ipfs-mini', () => {
 
       ipfs.sendAsync({ payload: null,
         uri: '/add',
+        boundary: 'random-boundary',
         accept: 'application/json' }, (err, result) => {
         assert.equal(typeof err, 'object');
         assert.equal(result, null);
@@ -115,10 +116,11 @@ describe('ipfs-mini', () => {
     });
 
     it('handle invalid payload with add', (done) => {
-      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https' });
+      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https', port: '5001' });
 
-      ipfs.sendAsync({ payload: 'Qma2uQEvt39zhpdT1fRC3UzS48RXPRPKaPyVoyEqwZADck',
+      ipfs.sendAsync({ payload: 'QmXSVWNxQ9zBE6H3teHAHo5mCW8nkcNFaPkzBVFoCjKu1Q',
         uri: '/add',
+        boundary: 'random-boundary',
         accept: 'application/json' }, (err, result) => {
         assert.equal(typeof err, 'object');
         assert.equal(result, null);
@@ -130,14 +132,14 @@ describe('ipfs-mini', () => {
 
   describe('add', () => {
     it('should function normally', (done) => {
-      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https' });
+      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https', port: '5001' });
 
       const testVal = 'hello world!';
 
       ipfs.add(testVal, (err, ipfsHash) => {
         assert.equal(err, null);
         assert.equal(typeof ipfsHash, 'string');
-
+        assert.equal(ipfsHash, 'QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j');
         ipfs.cat(ipfsHash, (catError, catResult) => {
           assert.equal(catError, null);
           assert.equal(typeof catResult, 'string');
@@ -155,6 +157,7 @@ describe('ipfs-mini', () => {
       ipfs.add(jpgBuffer, (addError, ipfsHash) => {
         assert.equal(addError, null);
         assert.equal(typeof ipfsHash, 'string');
+        assert.equal(ipfsHash, 'Qmec2nQNR53bP8MgA8ykxabAA1aQ21T9GZ8dbrwvMTMbJf');
 
         done();
       });
@@ -163,7 +166,7 @@ describe('ipfs-mini', () => {
 
   describe('stat', () => {
     it('should function normally', (done) => {
-      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https' });
+      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https', port: '5001' });
 
       const testVal = { hello: 'world!!!' };
 
@@ -189,14 +192,14 @@ describe('ipfs-mini', () => {
 
   describe('addJSON', () => {
     it('should function normally', (done) => {
-      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https' });
+      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https', port: '5001' });
 
       const testVal = { hello: 'world!!!' };
 
       ipfs.addJSON(testVal, (err, ipfsHash) => {
         assert.equal(err, null);
         assert.equal(typeof ipfsHash, 'string');
-
+        assert.equal(ipfsHash, 'QmUGRRbGTMJsQ3ZFbsBJPN4a6bragAhUjakyoQ7B9uTcof');
         ipfs.catJSON(ipfsHash, (catError, catResult) => {
           assert.equal(catError, null);
           assert.equal(typeof catResult, 'object');
@@ -210,9 +213,9 @@ describe('ipfs-mini', () => {
 
   describe('cat', () => {
     it('should function normally', (done) => {
-      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https' });
+      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https', port: '5001' });
 
-      ipfs.cat('QmbhrsdhbvQy3RyNiDdStgF4YRVc4arteS3wL5ES5M6cVd', (err, result) => {
+      ipfs.cat('QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j', (err, result) => {
         assert.equal(err, null);
         assert.equal(typeof result, 'string');
 
@@ -223,9 +226,9 @@ describe('ipfs-mini', () => {
 
   describe('catJSON', () => {
     it('should function normally', (done) => {
-      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https' });
+      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https', port: '5001' });
 
-      ipfs.catJSON('QmbhrsdhbvQy3RyNiDdStgF4YRVc4arteS3wL5ES5M6cVd', (err, result) => {
+      ipfs.catJSON('QmUGRRbGTMJsQ3ZFbsBJPN4a6bragAhUjakyoQ7B9uTcof', (err, result) => {
         assert.equal(err, null);
         assert.equal(typeof result, 'object');
 
@@ -234,9 +237,9 @@ describe('ipfs-mini', () => {
     });
 
     it('should handle invalid data call', (done) => {
-      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'http' });
+      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'http', port: '5001' });
 
-      ipfs.catJSON('Qma2uQEvt39zhpdT1fRC3UzS48RXPRPKaPyVoyEqwZADck', (err, result) => {
+      ipfs.catJSON('QmUGRRbGTMJsQ3ZFbsBJPN4a6bragAhUjakyoQ7B9uTcof', (err, result) => {
         assert.equal(typeof err, 'object');
         assert.equal(result, null);
 
@@ -245,9 +248,9 @@ describe('ipfs-mini', () => {
     });
 
     it('should handle invalid JSON data normally', (done) => {
-      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https' });
+      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https', port: '5001' });
 
-      ipfs.catJSON('Qma2uQEvt39zhpdT1fRC3UzS48RXPRPKaPyVoyEqwZADck', (err, result) => {
+      ipfs.catJSON('QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j', (err, result) => {
         assert.equal(typeof err, 'object');
         assert.equal(result, null);
 
