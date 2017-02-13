@@ -178,7 +178,8 @@
   },
   "browser": {
     "xmlhttprequest": false,
-    "./src/lib/XMLHttpRequest.js": "./src/lib/XMLHttpRequest-browser.js"
+    "./src/lib/XMLHttpRequest.js": "./src/lib/XMLHttpRequest-browser.js",
+    "./lib/lib/XMLHttpRequest.js": "./lib/lib/XMLHttpRequest-browser.js"
   },
   "dependencies": {
     "xmlhttprequest": "^1.8.0"

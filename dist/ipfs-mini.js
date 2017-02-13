@@ -1,5 +1,5 @@
- /* eslint-disable */
- /* eslint-disable */
+ /* eslint-disable */ 
+ /* eslint-disable */ 
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -69,12 +69,12 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 "use strict";
-'use strict';
+"use strict";
 
-var XMLHttpRequest = __webpack_require__(2).XMLHttpRequest;
+var XMLHttpRequest = window.XMLHttpRequest; // eslint-disable-line
 
 module.exports = XMLHttpRequest;
 
@@ -249,12 +249,6 @@ IPFS.prototype.catJSON = function cat(ipfsHash, callback) {
     }
   });
 };
-
-/***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-/* (ignored) */
 
 /***/ }
 /******/ ])
