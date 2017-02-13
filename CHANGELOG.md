@@ -1,3 +1,7 @@
+# 1.1.1 -- remove ipfs-api
+
+1. Package.json fix for browserify/webpack. Whoops.
+
 # 1.1.0 -- remove ipfs-api
 
 1. Remove ipfs-api requirement.. Yay.. thanks pelle!
