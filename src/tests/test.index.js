@@ -53,7 +53,7 @@ describe('ipfs-mini', () => {
       const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https' });
 
       ipfs.sendAsync({ payload: '',
-        uri: '/cat/QmXSVWNxQ9zBE6H3teHAHo5mCW8nkcNFaPkzBVFoCjKu1Q',
+        uri: '/cat/QmUGRRbGTMJsQ3ZFbsBJPN4a6bragAhUjakyoQ7B9uTcof',
         accept: 'application/json' }, (err, result) => {
         assert.equal(err, null);
         assert.equal(typeof result, 'string');

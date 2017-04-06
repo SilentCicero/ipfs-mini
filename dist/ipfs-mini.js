@@ -116,6 +116,7 @@ IPFS.prototype.setProvider = function setProvider(provider) {
   var self = this;
   var data = self.provider = Object.assign({
     host: '127.0.0.1',
+    pinning: true,
     port: '5001',
     protocol: 'http',
     base: '/api/v0' }, provider || {});
@@ -148,10 +149,12 @@ IPFS.prototype.sendAsync = function sendAsync(opts, cb) {
     }
   };
 
+  var pinningURI = self.provider.pinning && opts.uri === '/add' ? '?pin=true' : '';
+
   if (options.payload) {
-    request.open('POST', '' + self.requestBase + opts.uri);
+    request.open('POST', '' + self.requestBase + opts.uri + pinningURI);
   } else {
-    request.open('GET', '' + self.requestBase + opts.uri);
+    request.open('GET', '' + self.requestBase + opts.uri + pinningURI);
   }
 
   if (options.accept) {
@@ -192,7 +195,12 @@ IPFS.prototype.add = function addData(input, callback) {
   var addCallback = function addCallback(err, result) {
     return callback(err, !err ? result.Hash : null);
   };
-  this.sendAsync({ jsonParse: true, accept: 'application/json', uri: '/add', payload: payload, boundary: boundary }, addCallback);
+  this.sendAsync({
+    jsonParse: true,
+    accept: 'application/json',
+    uri: '/add',
+    payload: payload, boundary: boundary
+  }, addCallback);
 };
 
 /**

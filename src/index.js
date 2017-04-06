@@ -25,6 +25,7 @@ IPFS.prototype.setProvider = function setProvider(provider) {
   const self = this;
   const data = self.provider = Object.assign({
     host: '127.0.0.1',
+    pinning: true,
     port: '5001',
     protocol: 'http',
     base: '/api/v0' }, provider || {});
@@ -57,10 +58,12 @@ IPFS.prototype.sendAsync = function sendAsync(opts, cb) {
     }
   };
 
+  const pinningURI = self.provider.pinning && opts.uri === '/add' ? '?pin=true' : '';
+
   if (options.payload) {
-    request.open('POST', `${self.requestBase}${opts.uri}`);
+    request.open('POST', `${self.requestBase}${opts.uri}${pinningURI}`);
   } else {
-    request.open('GET', `${self.requestBase}${opts.uri}`);
+    request.open('GET', `${self.requestBase}${opts.uri}${pinningURI}`);
   }
 
   if (options.accept) {
@@ -99,7 +102,12 @@ IPFS.prototype.add = function addData(input, callback) {
   const payload = `--${boundary}\r\nContent-Disposition: form-data; name="path"\r\nContent-Type: application/octet-stream\r\n\r\n${data}\r\n--${boundary}--`;
 
   const addCallback = (err, result) => callback(err, (!err ? result.Hash : null));
-  this.sendAsync({ jsonParse: true, accept: 'application/json', uri: '/add', payload, boundary }, addCallback);
+  this.sendAsync({
+    jsonParse: true,
+    accept: 'application/json',
+    uri: '/add',
+    payload, boundary,
+  }, addCallback);
 };
 
 /**
