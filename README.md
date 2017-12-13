@@ -69,9 +69,9 @@ ipfs.addJSON({ somevalue: 2, name: 'Nick' }, (err, result) => {
   console.log(err, result);
 });
 
-// result null 'QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j'
+// result null 'QmYzWWCvYhqU6d5VvRvVwgbpqM9J3HH8TMbns9UvFSSvBf'
 
-ipfs.catJSON('QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j', (err, result) => {
+ipfs.catJSON('QmYzWWCvYhqU6d5VvRvVwgbpqM9J3HH8TMbns9UvFSSvBf', (err, result) => {
   console.log(err, result);
 });
 
