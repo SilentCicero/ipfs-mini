@@ -150,6 +150,25 @@ describe('ipfs-mini', () => {
       });
     });
 
+    it('should function normally promise add', (done) => {
+      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https', port: '5001' });
+
+      const testVal = 'hello world!';
+
+      ipfs.add(testVal)
+      .then(ipfsHash => {
+        assert.equal(typeof ipfsHash, 'string');
+        assert.equal(ipfsHash, 'QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j');
+        ipfs.cat(ipfsHash, (catError, catResult) => {
+          assert.equal(catError, null);
+          assert.equal(typeof catResult, 'string');
+          assert.equal(catResult, testVal);
+          done();
+        });
+      })
+      .catch(err => assert.equal(err, null));
+    });
+
     it('should add a JPEG buffer', (done) => {
       const jpgBuffer = new Buffer('ffd8ffe000104a46494600010101006000600000ffe1001645786966000049492a0008000000000000000000ffdb00430001010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101ffdb00430101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101ffc00011080001000103012200021101031101ffc400150001010000000000000000000000000000000affc40014100100000000000000000000000000000000ffc40014010100000000000000000000000000000000ffc40014110100000000000000000000000000000000ffda000c03010002110311003f00bf8001ffd9', 'hex');
       const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https' });
@@ -159,7 +178,14 @@ describe('ipfs-mini', () => {
         assert.equal(typeof ipfsHash, 'string');
         assert.equal(ipfsHash, 'Qmec2nQNR53bP8MgA8ykxabAA1aQ21T9GZ8dbrwvMTMbJf');
 
-        done();
+        ipfs.add(jpgBuffer)
+        .then(ipfsHash => {
+          assert.equal(typeof ipfsHash, 'string');
+          assert.equal(ipfsHash, 'Qmec2nQNR53bP8MgA8ykxabAA1aQ21T9GZ8dbrwvMTMbJf');
+
+          done();
+        })
+        .catch(addError => assert.equal(addError, null));
       });
     });
   });
@@ -222,6 +248,17 @@ describe('ipfs-mini', () => {
         done();
       });
     });
+
+    it('should function normally', done => {
+      const ipfs = new IPFS({ host: 'ipfs.infura.io', protocol: 'https', port: '5001' });
+
+      ipfs.cat('QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j')
+      .then(result => {
+        assert.equal(typeof result, 'string');
+        done();
+      })
+      .catch(err => assert.equal(err, null));
+    });
   });
 
   describe('catJSON', () => {
@@ -232,7 +269,13 @@ describe('ipfs-mini', () => {
         assert.equal(err, null);
         assert.equal(typeof result, 'object');
 
-        done();
+        ipfs.catJSON('QmUGRRbGTMJsQ3ZFbsBJPN4a6bragAhUjakyoQ7B9uTcof')
+        .then(result => {
+          assert.equal(typeof result, 'object');
+
+          done();
+        })
+        .catch(err => assert.equal(err, null));
       });
     });
 

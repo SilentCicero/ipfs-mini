@@ -37,7 +37,7 @@
 
 <br />
 
-A super tiny module for querying an IPFS node, that works in the browser and in nodejs. Only **2.76 kB** compressed!
+A super tiny module for querying an IPFS node, that works in the browser and in Node. Only **2.76 kB** compressed!
 
 This module was inspired by [`browser-ipfs`](https://github.com/pelle/browser-ipfs).
 
@@ -53,9 +53,7 @@ npm install --save ipfs-mini
 const IPFS = require('ipfs-mini');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
-ipfs.add('hello world!', (err, result) => {
-  console.log(err, result);
-});
+ipfs.add('hello world!').then(console.log).catch(console.log);
 
 // result null 'QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j'
 
@@ -71,9 +69,7 @@ ipfs.addJSON({ somevalue: 2, name: 'Nick' }, (err, result) => {
 
 // result null 'QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j'
 
-ipfs.catJSON('QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j', (err, result) => {
-  console.log(err, result);
-});
+ipfs.catJSON('QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j').then(console.log).catch(console.log);
 
 // result null { somevalue: 2, name: 'Nick' }
 ```
