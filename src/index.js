@@ -74,11 +74,7 @@ IPFS.prototype.sendAsync = function sendAsync(opts, cb) {
     try {
       var pinningURI = self.provider.pinning && opts.uri === '/add' ? '?pin=true' : '';
 
-      if (options.payload) {
-        request.open('POST', `${self.requestBase}${opts.uri}${pinningURI}`);
-      } else {
-        request.open('GET', `${self.requestBase}${opts.uri}${pinningURI}`);
-      }
+      request.open('POST', `${self.requestBase}${opts.uri}${pinningURI}`);
 
       if (options.accept) {
         request.setRequestHeader('accept', options.accept);
@@ -158,7 +154,7 @@ IPFS.prototype.stat = function cat(ipfsHash, callback) {
  */
 IPFS.prototype.cat = function cat(ipfsHash, callback) {
   var self = this;
-  return self.sendAsync({ uri: `/cat/${ipfsHash}` }, callback);
+  return self.sendAsync({ uri: `/cat?arg=${ipfsHash}` }, callback);
 };
 
 /**
@@ -169,5 +165,5 @@ IPFS.prototype.cat = function cat(ipfsHash, callback) {
  */
 IPFS.prototype.catJSON = function catJSON(ipfsHash, callback) {
   var self = this;
-  return self.sendAsync({ uri: `/cat/${ipfsHash}`, jsonParse: true }, callback);
+  return self.sendAsync({ uri: `/cat?arg=${ipfsHash}`, jsonParse: true }, callback);
 };
