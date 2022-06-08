@@ -158,7 +158,7 @@ IPFS.prototype.stat = function cat(ipfsHash, callback) {
  */
 IPFS.prototype.cat = function cat(ipfsHash, callback) {
   var self = this;
-  return self.sendAsync({ uri: `/cat/${ipfsHash}` }, callback);
+  return self.sendAsync({ uri: `/cat?arg=${ipfsHash}` }, callback);
 };
 
 /**
@@ -169,5 +169,5 @@ IPFS.prototype.cat = function cat(ipfsHash, callback) {
  */
 IPFS.prototype.catJSON = function catJSON(ipfsHash, callback) {
   var self = this;
-  return self.sendAsync({ uri: `/cat/${ipfsHash}`, jsonParse: true }, callback);
+  return self.sendAsync({ uri: `/cat?arg=${ipfsHash}`, jsonParse: true }, callback);
 };
